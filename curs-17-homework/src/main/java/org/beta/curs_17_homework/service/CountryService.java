@@ -25,9 +25,47 @@ public class CountryService {
     }
 
     public String getCountryCapital(String countryName) {
-        return String.valueOf(countries.stream()
-                .map(Country::name)
-                .filter(name -> name.equals(countryName))
-                .findFirst());
+        return countries.stream()
+                .filter(country -> country.name().equals(countryName))
+                .findFirst()
+                .map(Country::capital)
+                .orElseThrow(() -> new IllegalArgumentException("Country not found: " + countryName));
     }
+
+
+    public long getCountryPopulation(String countryName) {
+        return countries.stream()
+                .filter(country -> country.name().equals(countryName))
+                .findFirst()
+                .map(Country::population)
+                .orElseThrow(() -> new IllegalArgumentException("Country not found: " + countryName));
+    }
+
+    public List<Country> getCountryFromContinent(String continent) {
+        return countries.stream()
+                .filter(country -> country.continent().equals(continent))
+                .toList();
+    }
+
+    public List<String> getCountryNeighbours(String countryName) {
+        return countries.stream()
+                .filter(country -> country.name().equals(countryName))
+                .findFirst()
+                .map(Country::neighbours)
+                .orElseThrow(() -> new IllegalArgumentException("Country not found: " + countryName));
+    }
+
+    public List<Country> getCountriesWithPopulationFromContinentLargerThan(String continent, long population) {
+        return countries.stream()
+                .filter(country -> country.continent().equals(continent))
+                .filter(country -> country.population() > population)
+                .toList();
+    }
+
+    public List<Country> getCountriesWithNeighbours(String neighbour, String notNeighbour) {
+        return countries.stream()
+                .filter(country -> country.neighbours().contains(neighbour) && !(country.neighbours().contains(notNeighbour)))
+                .toList();
+    }
+
 }
