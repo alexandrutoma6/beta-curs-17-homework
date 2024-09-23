@@ -1,6 +1,7 @@
-package org.beta.curs_17_homework.reader;
+package org.beta.curs_17_homework.countries.reader;
 
-import org.beta.curs_17_homework.model.Country;
+import org.beta.curs_17_homework.countries.model.Country;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,15 +10,12 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CountryReader {
 
-    private final String path;
+//    private final String path = "C:\\Users\\Toma Alexandru\\java-curs\\curs17\\curs-17-homework\\curs-17-homework\\src\\main\\resources\\countries2.txt";
 
-    public CountryReader(String path) {
-        this.path = path;
-    }
-
-    public List<Country> readCountries() throws IOException {
+    public List<Country> readCountries(String path) throws IOException {
         List<Country> countries = new ArrayList<>();
 
         try (BufferedReader reader = Files.newBufferedReader(Path.of(path))) {

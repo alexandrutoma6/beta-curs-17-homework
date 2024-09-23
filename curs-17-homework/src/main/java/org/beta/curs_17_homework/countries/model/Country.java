@@ -1,4 +1,4 @@
-package org.beta.curs_17_homework.model;
+package org.beta.curs_17_homework.countries.model;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;

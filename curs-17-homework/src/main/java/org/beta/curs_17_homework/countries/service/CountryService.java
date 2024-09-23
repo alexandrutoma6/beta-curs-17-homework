@@ -1,18 +1,20 @@
-package org.beta.curs_17_homework.service;
-
-import org.beta.curs_17_homework.model.Country;
+package org.beta.curs_17_homework.countries.service;
+import lombok.SneakyThrows;
+import org.beta.curs_17_homework.countries.model.Country;
+import org.beta.curs_17_homework.countries.reader.CountryReader;
 import org.springframework.stereotype.Service;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CountryService {
 
-    private final List<Country> countries;
+    private final List<Country> countries = new ArrayList<>();
 
-    public CountryService(List<Country> countries) {
-        this.countries = countries;
+    @SneakyThrows
+    public CountryService(CountryReader countryReader) {
+        this.countries.addAll(countryReader.readCountries("C:\\Users\\Toma Alexandru\\java-curs\\curs17\\curs-17-homework\\curs-17-homework\\src\\main\\resources\\countries2.txt"));
     }
 
     public List<Country> getCountries() {
